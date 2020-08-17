@@ -7,9 +7,20 @@
 }
 
 .card {
-  width: 60vw;
+  width: 50%;
+  text-align: left;
 }
 
-.headline{
-  text-align: ce;
+.card-text{
+  
+  font-style: italic; 
 }
+
+.card-title{  text-align: left;
+  font-weight: bold;
+}
+
+.articleList{
+  justify-content: center;
+}
+

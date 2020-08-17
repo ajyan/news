@@ -25,22 +25,41 @@ function App() {
 
   return (
     <div className="App">
+      <nav class="navbar navbar-light bg-light">
+        <a class="navbar-brand">Navbar</a>
+        <form class="form-inline">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+            Search
+          </button>
+        </form>
+      </nav>
       {isFetching && <p>Loading...</p>}
-      {newsList.map(
-        ({ title, description, author, publishedAt, url, urlToImage }, idx) => {
-          return (
-            <Article
-              key={idx}
-              title={title}
-              description={description}
-              author={author}
-              publishedAt={publishedAt}
-              url={url}
-              urlToImage={urlToImage}
-            />
-          );
-        }
-      )}
+      <div class="col-xs-1" align="center">
+        {newsList.map(
+          (
+            { title, description, author, publishedAt, url, urlToImage },
+            idx
+          ) => {
+            return (
+              <Article
+                key={idx}
+                title={title}
+                description={description}
+                author={author}
+                publishedAt={publishedAt}
+                url={url}
+                urlToImage={urlToImage}
+              />
+            );
+          }
+        )}
+      </div>
     </div>
   );
 }
