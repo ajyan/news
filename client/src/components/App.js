@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import '../App.css';
 import axios from 'axios';
+import Article from './Article';
 
 function App() {
   let [newsList, setNewsList] = useState([]);
@@ -25,9 +26,21 @@ function App() {
   return (
     <div className="App">
       {isFetching && <p>Loading...</p>}
-      {newsList.map((article) => {
-        console.log(article);
-      })}
+      {newsList.map(
+        ({ title, description, author, publishedAt, url, urlToImage }, idx) => {
+          return (
+            <Article
+              key={idx}
+              title={title}
+              description={description}
+              author={author}
+              publishedAt={publishedAt}
+              url={url}
+              urlToImage={urlToImage}
+            />
+          );
+        }
+      )}
     </div>
   );
 }
