@@ -16,7 +16,7 @@ function App() {
 
   // Pagination variables
   const [currentPage, setCurrentPage] = useState(1);
-  const [articlesPerPage] = useState(10);
+  const [articlesPerPage] = useState(5);
 
   // Get current articles
   const lastArticleIdx = currentPage * articlesPerPage;
