@@ -2,7 +2,6 @@ import Article from './Article';
 import React from 'react';
 
 const ArticleList = ({ newsList }) => {
-  console.log(newsList);
   return (
     <div className="col-xs-1" align="center">
       {newsList.map(

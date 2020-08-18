@@ -3,13 +3,25 @@ import '../App.css';
 import axios from 'axios';
 import ArticleList from './ArticleComponents/ArticleList';
 import Nav from './Nav';
+import Pagination from './Pagination';
 
 function App() {
   const key = process.env.REACT_APP_NEWS_API_KEY;
   let [searchTerm, setSearchTerm] = useState('');
-  const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
   let [newsList, setNewsList] = useState([]);
+
+  //URLs for News API
+  const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
   let searchUrl = `https://newsapi.org/v2/top-headlines?q=${searchTerm}&apiKey=${key}`;
+
+  // Pagination variables
+  const [currentPage, setCurrentPage] = useState(1);
+  const [articlesPerPage] = useState(10);
+
+  // Get current articles
+  const lastArticleIdx = currentPage * articlesPerPage;
+  const firstArticleIdx = lastArticleIdx - articlesPerPage;
+  const currentList = newsList.slice(firstArticleIdx, lastArticleIdx);
 
   const handleSearch = () => {
     if (searchTerm.length < 3) {
@@ -45,7 +57,16 @@ function App() {
   return (
     <div className="App">
       <Nav setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
-      <ArticleList newsList={newsList} />
+      <ArticleList
+        newsList={currentList}
+        articlesPerPage={articlesPerPage}
+        totalArticles={newsList.length}
+      />
+      <Pagination
+        articlesPerPage={articlesPerPage}
+        totalArticles={newsList.length}
+        paginate={setCurrentPage}
+      />
     </div>
   );
 }
