@@ -12,7 +12,7 @@ function App() {
 
   //URLs for News API
   const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
-  let searchUrl = `https://newsapi.org/v2/everything?q=${searchTerm}&sortBy=popularity&apiKey=${key}`;
+  let searchUrl = `https://newsapi.org/v2/everything?q=${searchTerm}&sortBy=popularity&apiKey=d12ff6ce121b46eb8969cf07e74c196e`;
 
   // Pagination variables
   const [currentPage, setCurrentPage] = useState(1);
