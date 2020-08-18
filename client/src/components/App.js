@@ -1,22 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import axios from 'axios';
-import Article from './Article';
+import ArticleList from './ArticleComponents/ArticleList';
+import Nav from './Nav';
 
 function App() {
-  let [newsList, setNewsList] = useState([]);
-  let [isFetching, setIsFetching] = useState(true);
   const key = process.env.REACT_APP_NEWS_API_KEY;
-  const url = `http://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
+  let [searchTerm, setSearchTerm] = useState('');
+  const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
+  let [newsList, setNewsList] = useState([]);
+  let searchUrl = `https://newsapi.org/v2/top-headlines?q=${searchTerm}&apiKey=${key}`;
 
-  // Initial fetch of articles for populating state
+  const handleSearch = () => {
+    if (searchTerm.length < 3) {
+      window.alert('Search term must be at least 3 characters!');
+    }
+    axios
+      .get(searchUrl)
+      .then(({ data: { articles } }) => {
+        if (articles.length > 0) {
+          setNewsList(articles);
+        } else {
+          // handle empty search term, send back to original news list
+          window.alert(`No articles found for ${searchTerm}`);
+        }
+      })
+      .catch((err) => {
+        console.log('ERROR: ', err);
+      });
+  };
+
+  // Initial fetch of articles for populating list of articles
   useEffect(() => {
     axios
-      .get(url)
+      .get(topHeadlinesUrl)
       .then(({ data: { articles } }) => {
-        console.log('response from url', articles);
         setNewsList(articles);
-        setIsFetching(false);
       })
       .catch((err) => {
         console.log('ERROR: ', err);
@@ -25,41 +44,8 @@ function App() {
 
   return (
     <div className="App">
-      <nav class="navbar navbar-light bg-light">
-        <a class="navbar-brand">Navbar</a>
-        <form class="form-inline">
-          <input
-            class="form-control mr-sm-2"
-            type="search"
-            placeholder="Search"
-            aria-label="Search"
-          />
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            Search
-          </button>
-        </form>
-      </nav>
-      {isFetching && <p>Loading...</p>}
-      <div class="col-xs-1" align="center">
-        {newsList.map(
-          (
-            { title, description, author, publishedAt, url, urlToImage },
-            idx
-          ) => {
-            return (
-              <Article
-                key={idx}
-                title={title}
-                description={description}
-                author={author}
-                publishedAt={publishedAt}
-                url={url}
-                urlToImage={urlToImage}
-              />
-            );
-          }
-        )}
-      </div>
+      <Nav setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
+      <ArticleList newsList={newsList} />
     </div>
   );
 }
