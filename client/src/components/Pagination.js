@@ -7,7 +7,7 @@ const Pagination = ({ articlesPerPage, totalArticles, paginate }) => {
     pageNumbers.push(i);
   }
   return (
-    <div class="text-center">
+    <div class="text-xs=center">
       <ul className="pagination">
         {pageNumbers.map((number) => {
           return (
@@ -16,7 +16,7 @@ const Pagination = ({ articlesPerPage, totalArticles, paginate }) => {
                 onClick={() => {
                   paginate(number);
                 }}
-                href="!#"
+                href="/#"
                 className="page-link"
               >
                 {number}

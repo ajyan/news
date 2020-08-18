@@ -12,7 +12,7 @@ function App() {
 
   //URLs for News API
   const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
-  let searchUrl = `https://newsapi.org/v2/top-headlines?q=${searchTerm}&apiKey=${key}`;
+  let searchUrl = `https://newsapi.org/v2/everything?q=${searchTerm}&sortBy=popularity&apiKey=${key}`;
 
   // Pagination variables
   const [currentPage, setCurrentPage] = useState(1);
@@ -32,6 +32,7 @@ function App() {
       .then(({ data: { articles } }) => {
         if (articles.length > 0) {
           setNewsList(articles);
+          setCurrentPage(1);
         } else {
           // handle empty search term, send back to original news list
           window.alert(`No articles found for ${searchTerm}`);
@@ -57,11 +58,7 @@ function App() {
   return (
     <div className="App">
       <Nav setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
-      <ArticleList
-        newsList={currentList}
-        articlesPerPage={articlesPerPage}
-        totalArticles={newsList.length}
-      />
+      <ArticleList newsList={currentList} articlesPerPage={articlesPerPage} />
       <Pagination
         articlesPerPage={articlesPerPage}
         totalArticles={newsList.length}

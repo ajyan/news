@@ -40,6 +40,10 @@
   position: absolute;
 }
 
+.pagination {
+  justify-content: center;
+}
+
 @media only screen and (max-width: 600px) {
   .card {
     width: 100%;
