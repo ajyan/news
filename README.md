@@ -2,13 +2,22 @@
 
 [//]: # (Insert gif here)
 
+## Table of Contents
+
+- [Requirements](#Requirements)
+- [Getting Started](#Getting-Started)
+- [Application Features](#application-features)
+- [Languages & Tools](#languages-&-tools)
+- [License](#license)
+
+
 ## Requirements
 
 To run this app, you will need Node.js installed on your environement.
 
 You will also need to get an API key from [NewsAPI](https://newsapi.org/)
 
-# Setup and Installation
+# Getting Started
 
 ## Install
 
@@ -28,8 +37,6 @@ Within the client directory, create a `.env` file and paste in your News API Key
 ## Simple build for production
 
     $ npm run build
-
-
 
 # Application Features
 
@@ -52,5 +59,5 @@ Within the client directory, create a `.env` file and paste in your News API Key
 - [Axios](https://www.npmjs.com/package/axios) to handle client side requests to the News API
 
 ## License
----
+
 [MIT](https://choosealicense.com/licenses/mit/)
