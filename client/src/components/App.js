@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import '../App.css';
 import axios from 'axios';
 
+// React Router
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 // React components
 import ArticleList from './ArticleComponents/ArticleList';
 import Nav from './Nav';
@@ -11,6 +14,9 @@ function App() {
   const key = process.env.REACT_APP_NEWS_API_KEY;
   let [searchTerm, setSearchTerm] = useState('');
   let [newsList, setNewsList] = useState([]);
+  let [favesList, setFavesList] = useState(
+    JSON.parse(localStorage.getItem('favorites'))
+  );
 
   //URLs for News API
   const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
@@ -24,6 +30,15 @@ function App() {
   const lastArticleIdx = currentPage * articlesPerPage;
   const firstArticleIdx = lastArticleIdx - articlesPerPage;
   const currentList = newsList.slice(firstArticleIdx, lastArticleIdx);
+  // const currentFavesList =
+  //   favesList.slice(firstArticleIdx, lastArticleIdx) || [];
+
+  // Get favorites
+  const getFavorites = () => {
+    let favorites = JSON.parse(localStorage.getItem('favorites'));
+    setFavesList(favorites);
+    setCurrentPage(1);
+  };
 
   const handleSearch = () => {
     if (searchTerm.length < 3) {
@@ -45,10 +60,10 @@ function App() {
   };
 
   const handleSave = (article) => {
-    let currentStorage = JSON.parse(localStorage.getItem('favorites')) || {};
-    const title = article.title;
-    currentStorage[title] = article;
+    let currentStorage = JSON.parse(localStorage.getItem('favorites')) || [];
+    currentStorage.push(article);
     localStorage.setItem('favorites', JSON.stringify(currentStorage));
+    getFavorites();
   };
 
   // Initial fetch of articles for populating list of articles
@@ -65,13 +80,31 @@ function App() {
 
   return (
     <div className="App">
-      <Nav setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
-      <ArticleList newsList={currentList} handleSave={handleSave} />
-      <Pagination
-        articlesPerPage={articlesPerPage}
-        totalArticles={newsList.length}
-        paginate={setCurrentPage}
-      />
+      <Router>
+        <Nav setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
+
+        <Switch>
+          <Route path="/favorites">
+            {console.log('loading', favesList)}
+            {favesList && (
+              <ArticleList newsList={favesList} handleSave={handleSave} />
+            )}
+            <Pagination
+              articlesPerPage={articlesPerPage}
+              totalArticles={newsList.length}
+              paginate={setCurrentPage}
+            />
+          </Route>
+          <Route path="/">
+            <ArticleList newsList={currentList} handleSave={handleSave} />
+            <Pagination
+              articlesPerPage={articlesPerPage}
+              totalArticles={newsList.length}
+              paginate={setCurrentPage}
+            />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 }
