@@ -25,7 +25,7 @@ You will also need to get an API key from [NewsAPI](https://newsapi.org/)
     $ cd client
     $ npm install
 
-## Configure env
+## Configure `.env`
 
 Within the client directory, create a `.env` file and paste in your News API Key as `REACT_APP_NEWS_API_KEY = YOUR_KEY_HERE`
 
