@@ -25,25 +25,29 @@ let Article = ({
           <p className="card-text">{description}</p>
           {!showMore ? (
             <>
-              {/* add favorited state here */}
-              <button
-                className="btn btn-warning add-button"
-                onClick={() => {
-                  let article = {
-                    title: title,
-                    url: url,
-                    description: description,
-                    urlToImage: urlToImage,
-                    publishedAt: publishedAt,
-                    content: content,
-                    source: source,
-                  };
-                  handleSave(article);
-                }}
-                id="add-button"
-              >
-                ★
-              </button>
+              {favorited ? (
+                <button className="btn btn-warning add-button">Saved</button>
+              ) : (
+                <button
+                  className="btn btn-warning add-button"
+                  onClick={() => {
+                    let article = {
+                      title: title,
+                      url: url,
+                      description: description,
+                      urlToImage: urlToImage,
+                      publishedAt: publishedAt,
+                      content: content,
+                      source: { name: source },
+                    };
+                    handleSave(article);
+                    setFavorited(true);
+                  }}
+                  id="add-button"
+                >
+                  ★
+                </button>
+              )}
               <button
                 onClick={() => {
                   setShowMore(!showMore);

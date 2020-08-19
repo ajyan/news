@@ -18,7 +18,7 @@ function App() {
     JSON.parse(localStorage.getItem('favorites'))
   );
 
-  //URLs for News API
+  // URLs for News API
   const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
   let searchUrl = `https://newsapi.org/v2/everything?q=${searchTerm}&sortBy=popularity&apiKey=${key}`;
 
@@ -47,7 +47,7 @@ function App() {
     setCurrentFavePage(1);
   };
 
-  // returns the articles pertaining to a search query
+  // Returns the articles pertaining to a search query
   const handleSearch = () => {
     if (searchTerm.length < 3) {
       window.alert('Search term must be at least 3 characters!');
@@ -99,6 +99,7 @@ function App() {
                 <ArticleList
                   newsList={currentFavesList}
                   handleSave={handleSave}
+                  listType="favorites"
                 />
                 <Pagination
                   articlesPerPage={articlesPerPage}
@@ -109,7 +110,11 @@ function App() {
             )}
           </Route>
           <Route path="/home">
-            <ArticleList newsList={currentList} handleSave={handleSave} />
+            <ArticleList
+              newsList={currentList}
+              handleSave={handleSave}
+              listType="main"
+            />
             <Pagination
               articlesPerPage={articlesPerPage}
               totalArticles={newsList.length}
