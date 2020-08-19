@@ -24,22 +24,32 @@ function App() {
 
   // Pagination variables
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentFavePage, setCurrentFavePage] = useState(1);
   const [articlesPerPage] = useState(5);
 
   // Get current articles
   const lastArticleIdx = currentPage * articlesPerPage;
   const firstArticleIdx = lastArticleIdx - articlesPerPage;
-  const currentList = newsList.slice(firstArticleIdx, lastArticleIdx);
-  // const currentFavesList =
-  //   favesList.slice(firstArticleIdx, lastArticleIdx) || [];
+  let currentList = newsList.slice(firstArticleIdx, lastArticleIdx);
+
+  // Get current favorite articles
+  const lastFaveIdx = currentFavePage * articlesPerPage;
+  const firstFaveIdx = lastFaveIdx - articlesPerPage;
+  let currentFavesList;
+  if (favesList !== null) {
+    currentFavesList = favesList.slice(firstFaveIdx, lastFaveIdx) || [];
+  } else {
+    currentFavesList = [];
+  }
 
   // Get favorites
   const getFavorites = () => {
     let favorites = JSON.parse(localStorage.getItem('favorites'));
     setFavesList(favorites);
-    setCurrentPage(1);
+    setCurrentFavePage(1);
   };
 
+  // returns the articles pertaining to a search query
   const handleSearch = () => {
     if (searchTerm.length < 3) {
       window.alert('Search term must be at least 3 characters!');
@@ -59,6 +69,7 @@ function App() {
       });
   };
 
+  // Saves the article to an array in local storage
   const handleSave = (article) => {
     let currentStorage = JSON.parse(localStorage.getItem('favorites')) || [];
     currentStorage.push(article);
@@ -68,6 +79,9 @@ function App() {
 
   // Initial fetch of articles for populating list of articles
   useEffect(() => {
+    let currentStorage = JSON.parse(localStorage.getItem('favorites')) || [];
+    localStorage.setItem('favorites', JSON.stringify(currentStorage));
+    console.log(favesList);
     axios
       .get(topHeadlinesUrl)
       .then(({ data: { articles } }) => {
@@ -85,15 +99,19 @@ function App() {
 
         <Switch>
           <Route path="/favorites">
-            {console.log('loading', favesList)}
-            {favesList && (
-              <ArticleList newsList={favesList} handleSave={handleSave} />
+            {favesList !== null && (
+              <>
+                <ArticleList
+                  newsList={currentFavesList}
+                  handleSave={handleSave}
+                />
+                <Pagination
+                  articlesPerPage={articlesPerPage}
+                  totalArticles={favesList.length}
+                  paginate={setCurrentFavePage}
+                />
+              </>
             )}
-            <Pagination
-              articlesPerPage={articlesPerPage}
-              totalArticles={newsList.length}
-              paginate={setCurrentPage}
-            />
           </Route>
           <Route path="/">
             <ArticleList newsList={currentList} handleSave={handleSave} />

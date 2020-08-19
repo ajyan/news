@@ -11,6 +11,7 @@ let Article = ({
   handleSave,
 }) => {
   let [showMore, setShowMore] = useState(false);
+  let [favorited, setFavorited] = useState(false);
   var date = new Date(publishedAt).toDateString();
   return (
     <>
@@ -24,6 +25,7 @@ let Article = ({
           <p className="card-text">{description}</p>
           {!showMore ? (
             <>
+              {/* add favorited state here */}
               <button
                 className="btn btn-warning add-button"
                 onClick={() => {
@@ -53,6 +55,7 @@ let Article = ({
               </button>
             </>
           ) : (
+            // Show more content
             <>
               <div>{content.split('[+')[0]}</div>
               <br />
@@ -64,7 +67,22 @@ let Article = ({
                 <strong>Source: </strong>
                 {source}
               </p>
-              <button className="btn btn-warning add-button" id="add-button">
+              <button
+                className="btn btn-warning add-button"
+                onClick={() => {
+                  let article = {
+                    title: title,
+                    url: url,
+                    description: description,
+                    urlToImage: urlToImage,
+                    publishedAt: publishedAt,
+                    content: content,
+                    source: source,
+                  };
+                  handleSave(article);
+                }}
+                id="add-button"
+              >
                 ★
               </button>
               <button

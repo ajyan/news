@@ -15,7 +15,7 @@ const Pagination = ({ articlesPerPage, totalArticles, paginate }) => {
               onClick={() => {
                 paginate(number);
               }}
-              href="/#"
+              href="javascript:void(0)"
               className="page-link"
             >
               {number}
