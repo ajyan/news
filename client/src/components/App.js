@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import '../App.css';
 import axios from 'axios';
+
+// React components
 import ArticleList from './ArticleComponents/ArticleList';
 import Nav from './Nav';
 import Pagination from './Pagination';
@@ -12,7 +14,7 @@ function App() {
 
   //URLs for News API
   const topHeadlinesUrl = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${key}`;
-  let searchUrl = `https://newsapi.org/v2/everything?q=${searchTerm}&sortBy=popularity&apiKey=d12ff6ce121b46eb8969cf07e74c196e`;
+  let searchUrl = `https://newsapi.org/v2/everything?q=${searchTerm}&sortBy=popularity&apiKey=${key}`;
 
   // Pagination variables
   const [currentPage, setCurrentPage] = useState(1);
@@ -34,13 +36,19 @@ function App() {
           setNewsList(articles);
           setCurrentPage(1);
         } else {
-          // handle empty search term, send back to original news list
           window.alert(`No articles found for ${searchTerm}`);
         }
       })
       .catch((err) => {
         console.log('ERROR: ', err);
       });
+  };
+
+  const handleSave = (article) => {
+    let currentStorage = JSON.parse(localStorage.getItem('favorites')) || {};
+    const title = article.title;
+    currentStorage[title] = article;
+    localStorage.setItem('favorites', JSON.stringify(currentStorage));
   };
 
   // Initial fetch of articles for populating list of articles
@@ -58,7 +66,7 @@ function App() {
   return (
     <div className="App">
       <Nav setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
-      <ArticleList newsList={currentList} articlesPerPage={articlesPerPage} />
+      <ArticleList newsList={currentList} handleSave={handleSave} />
       <Pagination
         articlesPerPage={articlesPerPage}
         totalArticles={newsList.length}

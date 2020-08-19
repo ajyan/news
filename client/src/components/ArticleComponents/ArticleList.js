@@ -1,7 +1,7 @@
 import Article from './Article';
 import React from 'react';
 
-const ArticleList = ({ newsList }) => {
+const ArticleList = ({ newsList, handleSave }) => {
   return (
     <div className="col-xs-1" align="center">
       {newsList.map(
@@ -29,6 +29,7 @@ const ArticleList = ({ newsList }) => {
               urlToImage={urlToImage}
               content={content}
               source={name}
+              handleSave={handleSave}
             />
           );
         }

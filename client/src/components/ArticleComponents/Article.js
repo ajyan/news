@@ -8,6 +8,7 @@ let Article = ({
   publishedAt,
   content,
   source,
+  handleSave,
 }) => {
   let [showMore, setShowMore] = useState(false);
   var date = new Date(publishedAt).toDateString();
@@ -22,15 +23,35 @@ let Article = ({
           </a>
           <p className="card-text">{description}</p>
           {!showMore ? (
-            <button
-              onClick={() => {
-                setShowMore(!showMore);
-              }}
-              className="btn btn-warning"
-              href="#"
-            >
-              See More
-            </button>
+            <>
+              <button
+                className="btn btn-warning add-button"
+                onClick={() => {
+                  let article = {
+                    title: title,
+                    url: url,
+                    description: description,
+                    urlToImage: urlToImage,
+                    publishedAt: publishedAt,
+                    content: content,
+                    source: source,
+                  };
+                  handleSave(article);
+                }}
+                id="add-button"
+              >
+                ★
+              </button>
+              <button
+                onClick={() => {
+                  setShowMore(!showMore);
+                }}
+                className="btn btn-warning"
+                href="#"
+              >
+                See More
+              </button>
+            </>
           ) : (
             <>
               <div>{content.split('[+')[0]}</div>
@@ -43,6 +64,9 @@ let Article = ({
                 <strong>Source: </strong>
                 {source}
               </p>
+              <button className="btn btn-warning add-button" id="add-button">
+                ★
+              </button>
               <button
                 onClick={() => {
                   setShowMore(!showMore);
