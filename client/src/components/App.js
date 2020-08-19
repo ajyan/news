@@ -32,15 +32,13 @@ function App() {
   const firstArticleIdx = lastArticleIdx - articlesPerPage;
   let currentList = newsList.slice(firstArticleIdx, lastArticleIdx);
 
-  // Get current favorite articles
+  // Get current favorite articles, if there are none, intialize an empty array
   const lastFaveIdx = currentFavePage * articlesPerPage;
   const firstFaveIdx = lastFaveIdx - articlesPerPage;
   let currentFavesList;
-  if (favesList !== null) {
-    currentFavesList = favesList.slice(firstFaveIdx, lastFaveIdx) || [];
-  } else {
-    currentFavesList = [];
-  }
+  favesList !== null
+    ? (currentFavesList = favesList.slice(firstFaveIdx, lastFaveIdx))
+    : (currentFavesList = []);
 
   // Get favorites
   const getFavorites = () => {
@@ -79,9 +77,6 @@ function App() {
 
   // Initial fetch of articles for populating list of articles
   useEffect(() => {
-    let currentStorage = JSON.parse(localStorage.getItem('favorites')) || [];
-    localStorage.setItem('favorites', JSON.stringify(currentStorage));
-    console.log(favesList);
     axios
       .get(topHeadlinesUrl)
       .then(({ data: { articles } }) => {
@@ -112,6 +107,14 @@ function App() {
                 />
               </>
             )}
+          </Route>
+          <Route path="/home">
+            <ArticleList newsList={currentList} handleSave={handleSave} />
+            <Pagination
+              articlesPerPage={articlesPerPage}
+              totalArticles={newsList.length}
+              paginate={setCurrentPage}
+            />
           </Route>
           <Route path="/">
             <ArticleList newsList={currentList} handleSave={handleSave} />
