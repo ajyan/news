@@ -31,12 +31,8 @@ Within the client directory, create a `.env` file and paste in your News API Key
 
 
 ## Start & Watch
-
+Within the client directory:
     $ npm start
-
-## Simple build for production
-
-    $ npm run build
 
 # Application Features
 

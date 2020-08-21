@@ -11,10 +11,9 @@ import Nav from './Nav';
 import Pagination from './Pagination';
 
 // Utils
-import { removeDuplicates } from './utils';
+import { removeDuplicates, key } from './utils';
 
 function App() {
-  const key = process.env.REACT_APP_NEWS_API_KEY;
   let [searchTerm, setSearchTerm] = useState('');
   let [newsList, setNewsList] = useState([]);
   let [favesList, setFavesList] = useState(
@@ -90,12 +89,11 @@ function App() {
       });
     getFavorites();
   };
+
   // Initial fetch of articles for populating list of articles
   useEffect(() => {
     fetchData();
   }, []);
-
-  useEffect(() => {}, []);
 
   return (
     <div className="App">
