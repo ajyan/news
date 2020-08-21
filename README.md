@@ -36,9 +36,10 @@ Within the client directory:
 
 # Application Features
 
-- Each article contains a photo, a headline, and a description. Upon clicking the `See More` button, users can then see the content, the published date, as well as the source of the article.
+- Each article contains a photo, a headline, and a description. Upon clicking the `See More` button, users can then see the content, the published date, as well as the source of the article
 - Users can submit a query to the site and return a list of relevant news articles 
 - Users can save their favorite articles by selecting the `★` and the article is saved to their favorites, which can be found at the `Favorites` link in the nav bar
+- Article lists are paginated and limited to 5 articles per page
 
 
 # Languages & Tools
@@ -48,6 +49,7 @@ Within the client directory:
 - [React](http://facebook.github.io/react) is used for UI.
 
 ### CSS
+
 - [Bootstrap](https://getbootstrap.com/docs/3.4/css/) as a basic styling framework
 
 ### HTTP Client Requests

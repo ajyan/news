@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 let Article = ({
   title,
@@ -10,9 +10,14 @@ let Article = ({
   source,
   handleSave,
 }) => {
-  let [showMore, setShowMore] = useState(false);
-  let [saving, setSaving] = useState(false);
+  const [showMore, setShowMore] = useState(false);
+  const [saving, setSaving] = useState(false);
+
   var date = new Date(publishedAt).toDateString();
+
+  useEffect(() => {
+    setShowMore(false);
+  }, [title]);
 
   return (
     <>
