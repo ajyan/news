@@ -2,15 +2,15 @@
 
 ## Table of Contents
 
+- [Application Features](#application-features)
 - [Requirements](#Requirements)
 - [Getting Started](#Getting-Started)
-- [Application Features](#application-features)
 - [Languages & Tools](#languages-&-tools)
 - [License](#license)
 
 # Application Features
 
-- Each article contains a photo, a headline, and a description. Upon clicking the `See More` button, users can then see the article's content, published date, and news source.
+- Each article contains a photo, a headline, and a description. Upon clicking the `See More` button, users can then see the article's content, published date, and news source
 ![](./GIFs/ArticleListScroll.gif)
 - Users can submit a word in the search bar and return a list of relevant news articles 
 ![](./GIFs/search.gif)
@@ -20,7 +20,7 @@
 
 ## Requirements
 
-To run this app, you will need Node.js and [yarn](https://classic.yarnpkg.com/en/) installed on your environement.
+To run this app, you will need Node.js and [yarn](https://classic.yarnpkg.com/en/) installed on your environement
 
 You will also need to get an API key from [NewsAPI](https://newsapi.org/)
 
@@ -43,6 +43,7 @@ Within the client directory, create a `.env` file and paste in your News API Key
 The application will be running on port 3000
 
 ## Simple build for production
+
 Within the client directory:
 
     $ npm run build
@@ -50,13 +51,11 @@ Within the client directory:
 
 The application will be running on port 5000
 
-
-
 # Languages & Tools
 
 ### JavaScript
 
-- [React](http://facebook.github.io/react) is used for UI.
+- [React](http://facebook.github.io/react) is used for UI
 
 ### CSS
 - [Bootstrap](https://getbootstrap.com/docs/3.4/css/) as a basic styling framework
