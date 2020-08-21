@@ -5,7 +5,7 @@ module.exports = {
         return storage;
       }
     }
-    storage.push(article);
+    storage.unshift(article);
     return storage;
   },
   key: process.env.REACT_APP_NEWS_API_KEY,
