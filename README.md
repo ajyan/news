@@ -8,6 +8,15 @@
 - [Languages & Tools](#languages-&-tools)
 - [License](#license)
 
+# Application Features
+
+- Each article contains a photo, a headline, and a description. Upon clicking the `See More` button, users can then see the article's content, published date, and news source.
+![](./GIFs/ArticleListScroll.gif)
+- Users can submit a word in the search bar and return a list of relevant news articles 
+![](./GIFs/search.gif)
+- Users can save their favorite articles by selecting the `★` and the article is saved to their favorites, which can be found at the `Favorites` link in the nav bar
+![](./GIFs/favorites.gif)
+- Each set of articles, favorites, and search results has been paginated with a limit of five articles per page
 
 ## Requirements
 
@@ -27,7 +36,6 @@ You will also need to get an API key from [NewsAPI](https://newsapi.org/)
 
 Within the client directory, create a `.env` file and paste in your News API Key as `REACT_APP_NEWS_API_KEY = YOUR_KEY_HERE`
 
-
 ## Start & Watch
 
     $ npm start
@@ -42,15 +50,6 @@ Within the client directory:
 
 The application will be running on port 5000
 
-# Application Features
-
-- Each article contains a photo, a headline, and a description. Upon clicking the `See More` button, users can then see the content, the published date, as well as the source of the article.
-![](./GIFs/ArticleListScroll.gif)
-- Users can submit a query to the site and return a list of relevant news articles 
-![](./GIFs/search.gif)
-- Users can save their favorite articles by selecting the `★` and the article is saved to their favorites, which can be found at the `Favorites` link in the nav bar
-![](./GIFs/favorites.gif)
-- Each set of articles, favorites, and search items has been paginated, with a limit of five articles per page
 
 
 # Languages & Tools
