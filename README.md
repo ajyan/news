@@ -11,7 +11,7 @@
 
 ## Requirements
 
-To run this app, you will need Node.js installed on your environement.
+To run this app, you will need Node.js and [yarn](https://classic.yarnpkg.com/en/) installed on your environement.
 
 You will also need to get an API key from [NewsAPI](https://newsapi.org/)
 
