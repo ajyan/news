@@ -9,10 +9,12 @@ let Article = ({
   content,
   source,
   handleSave,
+  saved,
 }) => {
   let [showMore, setShowMore] = useState(false);
-  let [favorited, setFavorited] = useState(false);
+  let [saving, setSaving] = useState(false);
   var date = new Date(publishedAt).toDateString();
+
   return (
     <>
       <br />
@@ -25,11 +27,23 @@ let Article = ({
           <p className="card-text">{description}</p>
           {!showMore ? (
             <>
-              {favorited ? (
-                <button className="btn btn-warning add-button">Saved</button>
+              {saving ? (
+                <button
+                  className="btn btn-warning add-button"
+                  type="button"
+                  disabled
+                >
+                  <span
+                    class="spinner-border spinner-border-sm"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  <span class="sr-only">Loading...</span>
+                </button>
               ) : (
                 <button
                   className="btn btn-warning add-button"
+                  id="add-button"
                   onClick={() => {
                     let article = {
                       title: title,
@@ -41,9 +55,11 @@ let Article = ({
                       source: { name: source },
                     };
                     handleSave(article);
-                    setFavorited(true);
+                    setSaving(true);
+                    setTimeout(() => {
+                      setSaving(false);
+                    }, 500);
                   }}
-                  id="add-button"
                 >
                   ★
                 </button>

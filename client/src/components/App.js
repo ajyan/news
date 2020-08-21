@@ -67,11 +67,21 @@ function App() {
       });
   };
 
+  const removeDuplicates = (storage, article) => {
+    for (let i = 0; i < storage.length; i++) {
+      if (storage[i].title === article.title) {
+        return storage;
+      }
+    }
+    storage.push(article);
+    return storage;
+  };
+
   // Saves the article to an array in local storage
   const handleSave = (article) => {
     let currentStorage = JSON.parse(localStorage.getItem('favorites')) || [];
-    currentStorage.push(article);
-    localStorage.setItem('favorites', JSON.stringify(currentStorage));
+    let uniqueStorage = removeDuplicates(currentStorage, article);
+    localStorage.setItem('favorites', JSON.stringify(uniqueStorage));
     getFavorites();
   };
 
@@ -109,7 +119,7 @@ function App() {
               </>
             )}
           </Route>
-          <Route path="/home">
+          <Route path="/">
             <ArticleList
               newsList={currentList}
               handleSave={handleSave}

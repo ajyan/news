@@ -2,6 +2,15 @@ import Article from './Article';
 import React from 'react';
 
 const ArticleList = ({ newsList, handleSave }) => {
+  const checkSaved = (title) => {
+    const currentStorage = JSON.parse(localStorage.getItem('favorites')) || [];
+    for (let i = 0; i < currentStorage.length; i++) {
+      if (currentStorage[i].title === title) {
+        return true;
+      }
+    }
+    return false;
+  };
   return (
     <div className="col-xs-1" align="center">
       {newsList.map(
@@ -30,6 +39,7 @@ const ArticleList = ({ newsList, handleSave }) => {
               content={content}
               source={name}
               handleSave={handleSave}
+              saved={checkSaved(title)}
             />
           );
         }
