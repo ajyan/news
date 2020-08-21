@@ -43,7 +43,8 @@ function App() {
   // Get favorites
   const getFavorites = () => {
     let favorites = JSON.parse(localStorage.getItem('favorites'));
-    setFavesList(favorites);
+    let latestFavorites = favorites.reverse();
+    setFavesList(latestFavorites);
     setCurrentFavePage(1);
   };
 
