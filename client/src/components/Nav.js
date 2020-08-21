@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
-const Nav = ({ setSearchTerm, handleSearch }) => {
+const Nav = ({ setSearchTerm, handleSearch, fetchData }) => {
   return (
     <nav
       className="navbar navbar-expand-lg navbar-nav bg-warning"
@@ -33,7 +33,13 @@ const Nav = ({ setSearchTerm, handleSearch }) => {
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
           <li className="nav-item active">
-            <Link className="nav-link" to="/">
+            <Link
+              className="nav-link"
+              to="/"
+              onClick={() => {
+                fetchData();
+              }}
+            >
               Home
             </Link>
           </li>

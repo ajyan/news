@@ -86,8 +86,7 @@ function App() {
     getFavorites();
   };
 
-  // Initial fetch of articles for populating list of articles
-  useEffect(() => {
+  const fetchData = () => {
     axios
       .get(topHeadlinesUrl)
       .then(({ data: { articles } }) => {
@@ -96,12 +95,20 @@ function App() {
       .catch((err) => {
         console.log('ERROR: ', err);
       });
+  };
+  // Initial fetch of articles for populating list of articles
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return (
     <div className="App">
       <Router>
-        <Nav setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
+        <Nav
+          setSearchTerm={setSearchTerm}
+          handleSearch={handleSearch}
+          fetchData={fetchData}
+        />
 
         <Switch>
           <Route path="/favorites">
@@ -110,7 +117,6 @@ function App() {
                 <ArticleList
                   newsList={currentFavesList}
                   handleSave={handleSave}
-                  listType="favorites"
                 />
                 <Pagination
                   articlesPerPage={articlesPerPage}
@@ -119,18 +125,6 @@ function App() {
                 />
               </>
             )}
-          </Route>
-          <Route path="/">
-            <ArticleList
-              newsList={currentList}
-              handleSave={handleSave}
-              listType="main"
-            />
-            <Pagination
-              articlesPerPage={articlesPerPage}
-              totalArticles={newsList.length}
-              paginate={setCurrentPage}
-            />
           </Route>
           <Route path="/">
             <ArticleList newsList={currentList} handleSave={handleSave} />

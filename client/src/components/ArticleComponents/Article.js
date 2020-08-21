@@ -9,7 +9,6 @@ let Article = ({
   content,
   source,
   handleSave,
-  saved,
 }) => {
   let [showMore, setShowMore] = useState(false);
   let [saving, setSaving] = useState(false);
@@ -22,7 +21,7 @@ let Article = ({
         <img src={urlToImage} className="card-img" alt="" />
         <div className="card-body">
           <a className="card-title" href={url}>
-            {title.split(' - ')[0]}
+            {title && title.split(' - ')[0]}
           </a>
           <p className="card-text">{description}</p>
           {!showMore ? (
@@ -77,7 +76,7 @@ let Article = ({
           ) : (
             // Show more content
             <>
-              <div>{content.split('[+')[0]}</div>
+              <div>{content && content.split('[+')[0]}</div>
               <br />
               <p>
                 <strong>Published: </strong>
