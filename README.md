@@ -45,7 +45,7 @@ The application will be running on port 5000
 # Application Features
 
 - Each article contains a photo, a headline, and a description. Upon clicking the `See More` button, users can then see the content, the published date, as well as the source of the article.
-![](./GIFs/Article List Scroll.gif)
+![](./GIFs/ArticleListScroll.gif)
 - Users can submit a query to the site and return a list of relevant news articles 
 ![](./GIFs/search.gif)
 - Users can save their favorite articles by selecting the `★` and the article is saved to their favorites, which can be found at the `Favorites` link in the nav bar
