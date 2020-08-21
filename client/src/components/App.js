@@ -10,6 +10,9 @@ import ArticleList from './ArticleComponents/ArticleList';
 import Nav from './Nav';
 import Pagination from './Pagination';
 
+// Utils
+import { removeDuplicates } from './utils';
+
 function App() {
   const key = process.env.REACT_APP_NEWS_API_KEY;
   let [searchTerm, setSearchTerm] = useState('');
@@ -68,16 +71,6 @@ function App() {
       });
   };
 
-  const removeDuplicates = (storage, article) => {
-    for (let i = 0; i < storage.length; i++) {
-      if (storage[i].title === article.title) {
-        return storage;
-      }
-    }
-    storage.push(article);
-    return storage;
-  };
-
   // Saves the article to an array in local storage
   const handleSave = (article) => {
     let currentStorage = JSON.parse(localStorage.getItem('favorites')) || [];
@@ -95,11 +88,14 @@ function App() {
       .catch((err) => {
         console.log('ERROR: ', err);
       });
+    getFavorites();
   };
   // Initial fetch of articles for populating list of articles
   useEffect(() => {
     fetchData();
   }, []);
+
+  useEffect(() => {}, []);
 
   return (
     <div className="App">

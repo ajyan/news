@@ -33,11 +33,11 @@ let Article = ({
                   disabled
                 >
                   <span
-                    class="spinner-border spinner-border-sm"
+                    className="spinner-border spinner-border-sm"
                     role="status"
                     aria-hidden="true"
                   ></span>
-                  <span class="sr-only">Loading...</span>
+                  <span className="sr-only">Loading...</span>
                 </button>
               ) : (
                 <button
